@@ -50,7 +50,65 @@ def callback(call):
     generation_emoji = ""
     for x in range(10):
         generation_emoji = f"{generation_emoji}{emoji_love[random.randint(0, 6)]}"
-    bot.send_message(call.message.chat.id, f"Я очень рада за вас!{generation_emoji}")
+
+    markup = types.InlineKeyboardMarkup()
+    buttonOne = types.InlineKeyboardButton("Расскажа анегдот", callback_data="SayAnegdot")
+    buttonTwo = types.InlineKeyboardButton("Спой песенку", callback_data="song")
+    buttonTree = types.InlineKeyboardButton("Нет", callback_data="Don't")
+    markup.row(buttonOne, buttonTwo, buttonTree)
+
+    bot.send_message(call.message.chat.id, f"Я очень рада за вас!{generation_emoji}\nХотите я расскажу анегдот?\nИли песенку спою!", reply_markup=markup)
+
+
+@bot.callback_query_handler(func=lambda call: call.data == "SayAnegdot")
+def callback(call):
+    anegdot = str(open("anigdot.txt", "r", encoding="UTF-8"))
+    a = anegdot.split("\n")
+    bot.send_message(call.message.chat.id, f"{a[random.randint(0, 9)]}")
+
+
+@bot.callback_query_handler(func=lambda call: call.data == "song")
+def callback(call):
+    anegdot = str(open("anigdot.txt", "r", encoding="UTF-8"))
+    a = anegdot.split("\n")
+    bot.send_message(call.message.chat.id, f"{a[random.randint(0, 9)]}")
+
+
+@bot.callback_query_handler(func=lambda call: call.data == "bad")
+def callback(call):
+    markup = types.InlineKeyboardMarkup()
+    buttonOne = types.InlineKeyboardButton("да", callback_data="angry")
+    buttonTwo = types.InlineKeyboardButton("нет", callback_data="notLeg")
+    markup.row(buttonOne, buttonTwo)
+
+    bot.send_message(call.message.chat.id, f"Вас обидели?", reply_markup=markup)
+
+
+@bot.callback_query_handler(func=lambda call: call.data == "notLag")
+def callback(call):
+    bot.send_message(call.message.chat.id, f"Скем не бывает...")
+
+
+@bot.callback_query_handler(func=lambda call: call.data == "angry")
+def callback(call):
+    markup = types.InlineKeyboardMarkup()
+    buttonOne = types.InlineKeyboardButton("да", callback_data="angry2")
+    buttonTwo = types.InlineKeyboardButton("нет", callback_data="not")
+    markup.row(buttonOne, buttonTwo)
+
+    bot.send_message(call.message.chat.id, f"Разрешите я прокляну вашего обитчика? 😈😈😈😈", reply_markup=markup)
+
+
+@bot.callback_query_handler(func=lambda call: call.data == "not")
+def callback(call):
+    bot.send_message(call.message.chat.id, "Хорошо, пусть останется безнаказанным.")
+
+
+@bot.callback_query_handler(func=lambda call: call.data == "angry2")
+def callback(call):
+    bot.send_message(call.message.chat.id, "Проклинаю вашего обидчика, подождите...")
+    time.sleep(5)
+    bot.send_message(call.message.chat.id, "Я навела порчу на обидчика.\nДа свершится правосудие!!!")
 
 
 @bot.message_handler(content_types=["text"])
