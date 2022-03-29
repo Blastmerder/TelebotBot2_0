@@ -73,8 +73,8 @@ def callback(call):
 
 @bot.callback_query_handler(func=lambda call: call.data == "song")
 def callback(call):
-    anegdot = str(open("Испанская_гитара.txt", "r", encoding="UTF-8"))
-    a = anegdot.split("\n")
+    anegdot = open("Испанская_гитара.txt", "r", encoding="UTF-8")
+    a = str(anegdot).split("\n")
     print(a)
     audi = a[random.randint(0, 16)]
     audio = open(rf'{audi}', 'rb')
