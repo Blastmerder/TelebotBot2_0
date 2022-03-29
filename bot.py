@@ -56,7 +56,7 @@ def callback(call):
         generation_emoji = f"{generation_emoji}{emoji_love[random.randint(0, 6)]}"
 
     markup = types.InlineKeyboardMarkup()
-    buttonOne = types.InlineKeyboardButton("Расскажа анегдот", callback_data="SayAnegdot")
+    buttonOne = types.InlineKeyboardButton("Расскажи анегдот", callback_data="SayAnegdot")
     buttonTwo = types.InlineKeyboardButton("Спой песенку", callback_data="song")
     buttonTree = types.InlineKeyboardButton("Нет", callback_data="Don't")
     markup.row(buttonOne, buttonTwo, buttonTree)
@@ -75,6 +75,7 @@ def callback(call):
 def callback(call):
     anegdot = str(open("Испанская_гитара.txt", "r", encoding="UTF-8"))
     a = anegdot.split("\n")
+    print(a)
     audi = a[random.randint(0, 16)]
     audio = open(rf'{audi}', 'rb')
     bot.send_audio(call.message.chat.id, audio)
