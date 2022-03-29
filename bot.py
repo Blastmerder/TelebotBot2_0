@@ -11,7 +11,7 @@ time_set = "09:00"
 emoji_love = ["😘", "❤", "💕", "💋", "✨", "💖", "🥰"]
 last_command = ""
 
-bot = telebot.TeleBot("5017889526:AAHU6ExmufVnabKqA5UBZPlIKmvr2IPtJjw")
+bot = telebot.TeleBot("5102757220:AAGUZy8_esTuD0HrnE666Pd_p2vSTtC5Kk0")
 
 
 def send_hello():
@@ -39,7 +39,7 @@ def start(message):
     pid = random.randint(1, 6)
     photoid = f"photo{pid}.jpg" if pid != 2 and pid != 3 else f"photo{pid}.gif"
     bot.send_photo(message.chat.id, open(f'{photoid}', 'rb'))
-    bot.send_message(message.chat.id, f"Привет, привет! Я рада знакомству!{generation_emoji}\nМеня зовут Люси.\nА к тебе как обращаться?")
+    bot.send_message(message.chat.id, f"Привет, привет! {generation_emoji}\nМеня зовут Люси.\nА к тебе как обращаться?")
     global last_command
     last_command = "say_name"
 
