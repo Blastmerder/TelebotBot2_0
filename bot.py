@@ -56,25 +56,26 @@ def callback(call):
         generation_emoji = f"{generation_emoji}{emoji_love[random.randint(0, 6)]}"
 
     markup = types.InlineKeyboardMarkup()
-    buttonOne = types.InlineKeyboardButton("Расскажи анегдот", callback_data="SayAnegdot")
-    buttonTwo = types.InlineKeyboardButton("Спой песенку", callback_data="song")
-    buttonTree = types.InlineKeyboardButton("Нет", callback_data="Don't")
+    buttonOne = types.InlineKeyboardButton("Расскажи анекдот", callback_data="SayAnegdot")
+    buttonTwo = types.InlineKeyboardButton("включи музыку", callback_data="song")
+    buttonTree = types.InlineKeyboardButton("ничего ненадо", callback_data="Don't")
     markup.row(buttonOne, buttonTwo, buttonTree)
 
-    bot.send_message(call.message.chat.id, f"Я очень рада за вас!{generation_emoji}\nХотите я расскажу анегдот?\nИли песенку спою!", reply_markup=markup)
+    bot.send_message(call.message.chat.id, f"Я очень рада за вас!{generation_emoji}\nХотите я расскажу анекдот?\nИли музыку включу!", reply_markup=markup)
 
 
 @bot.callback_query_handler(func=lambda call: call.data == "SayAnegdot")
 def callback(call):
     anegdot = open("anigdot.txt", "r", encoding="UTF-8")
-    a = str(anegdot).split("\n")
-    bot.send_message(call.message.chat.id, f"{a[random.randint(0, 9)]}")
+    a = str(anegdot.read()).split("\n")
+    ra = (a[random.randint(0, 9)]).replace('/', f'\n')
+    bot.send_message(call.message.chat.id, f"{ra}")
 
 
 @bot.callback_query_handler(func=lambda call: call.data == "song")
 def callback(call):
     anegdot = open("Испанская_гитара.txt", "r", encoding="UTF-8")
-    a = str(anegdot).split("\n")
+    a = str(anegdot.read()).split("\n")
     print(a)
     audi = a[random.randint(0, 16)]
     audio = open(rf'{audi}', 'rb')
