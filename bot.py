@@ -68,6 +68,7 @@ def set_city(message):
                 job = schedule.every().day.at(f"0{message.text}").do(send_hello)
     elif last_command == "say_name":
         user_name = message.text
+        last_command = ""
 
 
 def schedule_checker():
@@ -77,6 +78,7 @@ def schedule_checker():
 
 job = schedule.every().day.at(time_set).do(send_hello)
 Thread(target=schedule_checker).start()
+
 
 def schedule_checker1():
     while True:
