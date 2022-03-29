@@ -1,5 +1,4 @@
 import random
-
 import telebot
 from telebot import types
 import time
@@ -42,6 +41,11 @@ def start(message):
     bot.send_message(message.chat.id, f"Привет, привет! {generation_emoji}\nМеня зовут Люси.\nА к тебе как обращаться?")
     global last_command
     last_command = "say_name"
+
+
+@bot.message_handler(commands=['привет'])
+def start(message):
+    send_hello()
 
 
 @bot.callback_query_handler(func=lambda call: call.data == "good")
