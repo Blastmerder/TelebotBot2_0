@@ -66,8 +66,8 @@ def callback(call):
 
 @bot.callback_query_handler(func=lambda call: call.data == "SayAnegdot")
 def callback(call):
-    anegdot = str(open("anigdot.txt", "r", encoding="UTF-8"))
-    a = anegdot.split("\n")
+    anegdot = open("anigdot.txt", "r", encoding="UTF-8")
+    a = str(anegdot).split("\n")
     bot.send_message(call.message.chat.id, f"{a[random.randint(0, 9)]}")
 
 
