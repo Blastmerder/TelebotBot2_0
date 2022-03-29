@@ -69,9 +69,12 @@ def callback(call):
 
 @bot.callback_query_handler(func=lambda call: call.data == "song")
 def callback(call):
-    anegdot = str(open("anigdot.txt", "r", encoding="UTF-8"))
+    anegdot = str(open("Испанская_гитара.txt", "r", encoding="UTF-8"))
     a = anegdot.split("\n")
-    bot.send_message(call.message.chat.id, f"{a[random.randint(0, 9)]}")
+    audi = a[random.randint(0, 16)]
+    audio = open(rf'{audi}', 'rb')
+    bot.send_audio(call.message.chat.id, audio)
+    audio.close()
 
 
 @bot.callback_query_handler(func=lambda call: call.data == "bad")
