@@ -32,8 +32,8 @@ def send_hello():
 def start(message):
     global id
     id = message.chat.id
-    id = random.randint(1, 6)
-    photoid = f"photo{id}.jpg" if id != 2 and id != 3 else f"photo{id}.gif"
+    pid = random.randint(1, 6)
+    photoid = f"photo{pid}.jpg" if pid != 2 and pid != 3 else f"photo{pid}.gif"
     bot.send_photo(message.chat.id, open(f'{photoid}', 'rb'))
     bot.send_message(message.chat.id, "Привет, привет! Рада знакомству!\nМеня зовут Люси.\nА к тебе как обращаться?")
     global last_command
