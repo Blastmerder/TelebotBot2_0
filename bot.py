@@ -31,11 +31,15 @@ def send_hello():
 @bot.message_handler(commands=['start'])
 def start(message):
     global id
+    global emoji_love
+    generation_emoji = ""
+    for x in range(10):
+        generation_emoji = f"{generation_emoji}{emoji_love[random.randint(0, 6)]}"
     id = message.chat.id
     pid = random.randint(1, 6)
     photoid = f"photo{pid}.jpg" if pid != 2 and pid != 3 else f"photo{pid}.gif"
     bot.send_photo(message.chat.id, open(f'{photoid}', 'rb'))
-    bot.send_message(message.chat.id, "Привет, привет! Рада знакомству!\nМеня зовут Люси.\nА к тебе как обращаться?")
+    bot.send_message(message.chat.id, f"Привет, привет! Я рада знакомству!{generation_emoji}\nМеня зовут Люси.\nА к тебе как обращаться?")
     global last_command
     last_command = "say_name"
 
@@ -69,6 +73,11 @@ def set_city(message):
     elif last_command == "say_name":
         user_name = message.text
         last_command = ""
+        global emoji_love
+        generation_emoji = ""
+        for x in range(10):
+            generation_emoji = f"{generation_emoji}{emoji_love[random.randint(0, 6)]}"
+        bot.send_message(message.chat.id, f"Рада знакомству {user_name}! {generation_emoji}")
 
 
 def schedule_checker():
