@@ -75,10 +75,10 @@ def callback(call):
 @bot.callback_query_handler(func=lambda call: call.data == "song")
 def callback(call):
     markup = types.InlineKeyboardMarkup()
-    buttonOne = types.InlineKeyboardButton("Испанская гитара", callback_data="испанская гитара")
-    buttonTwo = types.InlineKeyboardButton("класика", callback_data="класика")
+    buttonOne = types.InlineKeyboardButton("Испанская\n гитара", callback_data="испанская гитара")
+    buttonTwo = types.InlineKeyboardButton("классика", callback_data="класика")
     buttonTree = types.InlineKeyboardButton("рок", callback_data="рок")
-    buttonThour = types.InlineKeyboardButton("любимая музака моего создателя", callback_data="ЛММС")
+    buttonThour = types.InlineKeyboardButton("любимая\n музака\n моего\n создателя", callback_data="ЛММС")
     markup.row(buttonOne, buttonTwo, buttonTree, buttonThour)
 
     bot.send_message(call.message.chat.id,
@@ -86,7 +86,7 @@ def callback(call):
                      reply_markup=markup)
 
 
-@bot.callback_query_handler(func=lambda call: call.data == "Испанская гитара")
+@bot.callback_query_handler(func=lambda call: call.data == "испанская гитара")
 def callback(call):
     anegdot = open("Испанская_гитара.txt", "r", encoding="UTF-8")
     a = str(anegdot.read()).split("\n")
@@ -97,12 +97,12 @@ def callback(call):
     audio.close()
 
 
-@bot.callback_query_handler(func=lambda call: call.data == "Испанская гитара")
+@bot.callback_query_handler(func=lambda call: call.data == "Класика")
 def callback(call):
-    anegdot = open("Испанская_гитара.txt", "r", encoding="UTF-8")
+    anegdot = open("Класика.txt", "r", encoding="UTF-8")
     a = str(anegdot.read()).split("\n")
     print(a)
-    audi = f"Испанская гитара\\{a[random.randint(0, 16)]}"
+    audi = f"Испанская гитара\\{a[random.randint(0, 18)]}"
     audio = open(rf'{audi}', 'rb')
     bot.send_audio(call.message.chat.id, audio)
     audio.close()
