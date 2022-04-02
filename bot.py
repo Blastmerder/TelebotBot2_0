@@ -89,6 +89,7 @@ def callback(call):
 def callback(call):
     markup = types.InlineKeyboardMarkup()
     buttonOne = types.InlineKeyboardButton("Rammstein", callback_data="Rammstein")
+    buttonTwo = types.InlineKeyboardButton("prodigy", callback_data="prodigy")
     buttonTwo = types.InlineKeyboardButton("рок", callback_data="рок2")
     markup.row(buttonOne, buttonTwo)
 
@@ -98,6 +99,16 @@ def callback(call):
 
 
 @bot.callback_query_handler(func=lambda call: call.data == "Rammstein")
+def callback(call):
+    anegdot = open("Rammstein.txt", "r", encoding="UTF-8")
+    a = str(anegdot.read()).split("\n")
+    audi = f"{a[random.randint(0, 20)]}"
+    audio = open(rf'{audi}', 'rb')
+    bot.send_audio(call.message.chat.id, audio)
+    audio.close()
+
+
+@bot.callback_query_handler(func=lambda call: call.data == "prodigy")
 def callback(call):
     anegdot = open("Rammstein.txt", "r", encoding="UTF-8")
     a = str(anegdot.read()).split("\n")
