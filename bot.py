@@ -110,7 +110,7 @@ def callback(call):
     anegdot = open("Класика.txt", "r", encoding="UTF-8")
     a = str(anegdot.read()).split("\n")
     print(a)
-    audi = f"Испанская гитара\\{a[random.randint(0, 18)]}"
+    audi = f"Испанская гитара\\{a[random.randint(0, 17)]}"
     audio = open(rf'{audi}', 'rb')
     bot.send_audio(call.message.chat.id, audio)
     audio.close()
