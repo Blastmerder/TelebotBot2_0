@@ -75,11 +75,10 @@ def callback(call):
 @bot.callback_query_handler(func=lambda call: call.data == "song")
 def callback(call):
     markup = types.InlineKeyboardMarkup()
-    buttonOne = types.InlineKeyboardButton("Испанская\n гитара", callback_data="испанская гитара")
+    buttonOne = types.InlineKeyboardButton("Испанская гитара", callback_data="испанская гитара")
     buttonTwo = types.InlineKeyboardButton("классика", callback_data="класика")
     buttonTree = types.InlineKeyboardButton("рок", callback_data="рок")
-    buttonThour = types.InlineKeyboardButton("любимая\n музака\n моего\n создателя", callback_data="ЛММС")
-    markup.row(buttonOne, buttonTwo, buttonTree, buttonThour)
+    markup.row(buttonOne, buttonTwo, buttonTree)
 
     bot.send_message(call.message.chat.id,
                      f"Выберете тематику.",
@@ -101,6 +100,7 @@ def callback(call):
 def callback(call):
     anegdot = open("Класика.txt", "r", encoding="UTF-8")
     a = str(anegdot.read()).split("\n")
+    print(anegdot, a)
     audi = f"{a[random.randint(0, 17)]}"
     audio = open(rf'{audi}', 'rb')
     bot.send_audio(call.message.chat.id, audio)
