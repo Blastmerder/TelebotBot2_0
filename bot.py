@@ -96,11 +96,10 @@ def callback(call):
     audio.close()
 
 
-@bot.callback_query_handler(func=lambda call: call.data == "Класика")
+@bot.callback_query_handler(func=lambda call: call.data == "класика")
 def callback(call):
     anegdot = open("Класика.txt", "r", encoding="UTF-8")
     a = str(anegdot.read()).split("\n")
-    print(anegdot, a)
     audi = f"{a[random.randint(0, 17)]}"
     audio = open(rf'{audi}', 'rb')
     bot.send_audio(call.message.chat.id, audio)
