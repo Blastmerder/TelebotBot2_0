@@ -90,8 +90,8 @@ def callback(call):
     markup = types.InlineKeyboardMarkup()
     buttonOne = types.InlineKeyboardButton("Rammstein", callback_data="Rammstein")
     buttonTwo = types.InlineKeyboardButton("prodigy", callback_data="prodigy")
-    buttonTwo = types.InlineKeyboardButton("рок", callback_data="рок2")
-    markup.row(buttonOne, buttonTwo)
+    buttonTree = types.InlineKeyboardButton("рок", callback_data="рок2")
+    markup.row(buttonOne, buttonTwo, buttonTree)
 
     bot.send_message(call.message.chat.id,
                      f"У меня есть несколько вариантов.",
