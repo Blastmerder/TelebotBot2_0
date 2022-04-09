@@ -14,8 +14,12 @@ last_command = ""
 bot = telebot.TeleBot("5102757220:AAGUZy8_esTuD0HrnE666Pd_p2vSTtC5Kk0")
 
 
-def send_hello():
-    global id
+def send_hello(idDef=None):
+    if idDef is None:
+        global id
+    else:
+        id = idDef
+
     generation_emoji = ""
     for x in range(10):
         generation_emoji = f"{generation_emoji}{emoji_love[random.randint(0, 6)]}"
@@ -46,7 +50,7 @@ def start(message):
 
 @bot.message_handler(commands=['привет'])
 def start(message):
-    send_hello()
+    send_hello(message.chat.id)
 
 
 @bot.callback_query_handler(func=lambda call: call.data == "good")
@@ -177,7 +181,7 @@ def set_city(message):
     global job
     global user_name
     if message.text == "привет":
-        send_hello()
+        send_hello(message.chat.id)
     elif last_command == "say_name":
         user_name = message.text
         last_command = ""
