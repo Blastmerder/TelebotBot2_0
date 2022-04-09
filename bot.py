@@ -8,6 +8,7 @@ from threading import Thread
 user_name = ""
 time_set = "09:00"
 emoji_love = ["😘", "❤", "💕", "💋", "✨", "💖", "🥰"]
+cry_emoji = ["😰", "😭", "😥", "😫", "🥺"]
 last_command = ""
 
 bot = telebot.TeleBot("5102757220:AAGUZy8_esTuD0HrnE666Pd_p2vSTtC5Kk0")
@@ -87,28 +88,21 @@ def callback(call):
 
 @bot.callback_query_handler(func=lambda call: call.data == "рок")
 def callback(call):
+    global cry_emoji
+    generation_emoji = ""
+    for x in range(10):
+        generation_emoji = f"{generation_emoji}{cry_emoji[random.randint(0, 4)]}"
+
     markup = types.InlineKeyboardMarkup()
     buttonOne = types.InlineKeyboardButton("Rammstein", callback_data="Rammstein")
-    buttonTwo = types.InlineKeyboardButton("prodigy", callback_data="prodigy")
-    buttonTree = types.InlineKeyboardButton("рок", callback_data="рок2")
-    markup.row(buttonOne, buttonTwo, buttonTree)
+    markup.row(buttonOne)
 
     bot.send_message(call.message.chat.id,
-                     f"У меня есть несколько вариантов.",
+                     f"У меня есть пока-что только это из рока...{generation_emoji}",
                      reply_markup=markup)
 
 
 @bot.callback_query_handler(func=lambda call: call.data == "Rammstein")
-def callback(call):
-    anegdot = open("Rammstein.txt", "r", encoding="UTF-8")
-    a = str(anegdot.read()).split("\n")
-    audi = f"{a[random.randint(0, 20)]}"
-    audio = open(rf'{audi}', 'rb')
-    bot.send_audio(call.message.chat.id, audio)
-    audio.close()
-
-
-@bot.callback_query_handler(func=lambda call: call.data == "prodigy")
 def callback(call):
     anegdot = open("Rammstein.txt", "r", encoding="UTF-8")
     a = str(anegdot.read()).split("\n")
@@ -183,16 +177,7 @@ def set_city(message):
     global job
     global user_name
     if message.text == "привет":
-        time_set = [str(time.localtime().tm_hour), str(time.localtime().tm_min)]
-        if len(time_set[0]) == 2 or len(time_set[0]) == 1:
-            if len(time_set[1]) == 2 and len(time_set[0]) != 1:
-                send_hello()
-                schedule.cancel_job(job)
-                job = schedule.every().day.at(f"{message.text}").do(send_hello)
-            elif len(time_set[1]) == 2 and len(time_set[0]) == 1:
-                send_hello()
-                schedule.cancel_job(job)
-                job = schedule.every().day.at(f"0{message.text}").do(send_hello)
+        send_hello()
     elif last_command == "say_name":
         user_name = message.text
         last_command = ""
