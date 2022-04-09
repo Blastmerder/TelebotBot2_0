@@ -71,6 +71,7 @@ def callback(call):
 
 @bot.callback_query_handler(func=lambda call: call.data == "SayAnegdot")
 def callback(call):
+    bot.delete_message(call.message.chat.id, call.message.message_id)
     anegdot = open("anigdot.txt", "r", encoding="UTF-8")
     a = str(anegdot.read()).split("\n")
     ra = (a[random.randint(0, 9)]).replace('/', f'\n')
@@ -79,6 +80,7 @@ def callback(call):
 
 @bot.callback_query_handler(func=lambda call: call.data == "song")
 def callback(call):
+    bot.delete_message(call.message.chat.id, call.message.message_id)
     markup = types.InlineKeyboardMarkup()
     buttonOne = types.InlineKeyboardButton("Испанская гитара", callback_data="испанская гитара")
     buttonTwo = types.InlineKeyboardButton("классика", callback_data="класика")
