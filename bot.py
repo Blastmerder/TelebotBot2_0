@@ -30,7 +30,7 @@ def send_hello(idDef=None):
     buttonTree = types.InlineKeyboardButton("хочу оставить отзыв", callback_data="отзыв")
 
     markup.row_width = 2
-    markup.row(buttonOne, buttonTwo, buttonTree)
+    markup.row(buttonOne, buttonTwo)
 
     bot.send_message(id, f'привет дорогуша!{generation_emoji}\nКак у тебя дела?', reply_markup=markup)
 
